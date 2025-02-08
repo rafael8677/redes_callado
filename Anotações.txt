@@ -1,0 +1,29 @@
+- Observações:
+
+	- Compatibilidade com Linux: O código utiliza bibliotecas específicas (arpa/inet.h, unistd.h) que são compatíveis, apenas, com sistemas Unix/Linux.
+	- Execução no Terminal: Os códigos foram executados e testados pelo terminal, usando o GCC (gcc) e sem dependência de ambientes integrados.
+	- Uso da Porta 8080: A porta 8080 foi escolhida por não exigir permissões administrativas, sendo uma alternativa comum às portas 80 e 443.
+	- Tamanho do Buffer (1024 bytes): A definição como 1024 bytes é uma escolha comum, pois é compatível com a transmissão em redes TCP/IP.
+	- Funções Intuitivas: O código inclui funções para exibição, leitura e validação de jogadas, além de uma função para geração aleatória.
+	
+- Explicação sobre o Socket:
+
+	- O socket é criado usando o protocolo IPv4 (AF_INET) e o protocolo TCP (SOCK_STREAM), o que garante uma comunicação confiável e orientada.
+	- As opções do socket são configuradas com SO_REUSEADDR, para permitir o reuso imediato da porta após a finalização. Essa configuração também permite que múltiplos processos escutem a mesma porta.
+	- O socket é configurado para aceitar conexões de qualquer IP disponível na máquina, quando configurado com INADDR_ANY.
+	- O socket é associado ao endereço IP e à porta configurados, garantindo que ele estará disponível para conexões específicas.
+	- O socket é colocado no "modo escuta" com listen(), aguardando conexões de clientes. O valor 3 especifica o número máximo de conexões pendentes na fila, antes que novas conexões sejam rejeitadas.
+	- O servidor pode lidar com uma conexão por vez no código atual, porque aceita clientes sequencialmente (loop com accept()).
+
+- Etapas da comunicação TCP:
+
+	- O servidor entra em modo escuta através da função listen() e aguarda conexões com accept().
+	- O cliente se conecta ao servidor usando connect(), estabelecendo o canal de comunicação TCP.
+	- O cliente envia a jogada para o servidor com a função send().
+	- O servidor determina o ganhador da partida, monta uma resposta e a envia de volta ao cliente.
+	
+Cliente e servidor trocam mensagens até que um deles encerre a conexão. O servidor permanece no loop de escuta para aceitar novas conexões.
+
+O cliente oferece uma opção de continuar ou encerrar a partida.
+	
+	
