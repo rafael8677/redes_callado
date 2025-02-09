@@ -146,10 +146,8 @@ int main()
             send(client_socket, resposta, strlen(resposta), 0);
         }
 
-
         close(client_socket);
     }
 
     return 0;
 }
-
