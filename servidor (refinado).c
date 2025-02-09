@@ -8,7 +8,6 @@
 #define PORT 8080
 #define BUFFER_SIZE 1024
 
-// Função para determinar o vencedor
 const char* determinar_vencedor(char jogada_cliente, char jogada_servidor) {
     if (jogada_cliente == jogada_servidor) {
         return "\nEmpate!";
